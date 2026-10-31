@@ -1,132 +1,184 @@
-# ✦ StarGate
-### Secure Connectivity. Encrypted Networks. Protected Communication.
+# ✦ StarGate CLI
+### Secure Connectivity. One Command Away.
 
-**StarGate** is a network-security project designed to establish secure, encrypted communication channels over existing internet connections, including Wi-Fi and mobile data.
+**StarGate** is a command-line network security tool designed to establish encrypted communication tunnels over existing internet connections, including Wi-Fi and mobile data.
 
-The project aims to provide users with a reliable security layer that protects network traffic through encrypted tunnelling, secure authentication, and intelligent connection management.
+Built with Node.js, StarGate aims to simplify secure network connectivity by providing an intuitive terminal interface for managing encrypted connections, authentication, network status and gateway configurations.
 
----
-
-##  Overview
-
-In an increasingly connected world, internet access is available almost everywhere, but not every network can be trusted.
-
-StarGate aims to address this challenge by introducing an encrypted communication layer between devices and secure gateway infrastructure.
-
-Whether a user connects through a public Wi-Fi hotspot, a private wireless network, or mobile data, StarGate is designed to maintain a protected connection.
-
-**The goal is simple: make secure connectivity accessible, reliable, and independent of the network being used.**
-
-##  Core Objectives
-
-- **Encrypted Connectivity:** Establish secure communication tunnels over existing internet connections.
-- **Network Independence:** Support Wi-Fi and mobile data connectivity.
-- **Secure Authentication:** Restrict gateway access to authorized users and devices.
-- **Connection Stability:** Maintain secure sessions when network conditions change.
-- **Traffic Protection:** Protect traffic travelling between connected devices and StarGate gateways.
-- **Network Visibility:** Provide users with information about their connection and security status.
-
-##  Proposed Features
-
-| Feature | Description |
-|---|---|
-| Secure Tunnelling | Encrypted network communication |
-| Automatic Connection | Automatically establish protected connections |
-| Network Switching | Support transitions between Wi-Fi and mobile data |
-| Kill Switch | Prevent traffic leakage if the tunnel disconnects |
-| DNS Protection | Use trusted DNS resolution |
-| Device Authentication | Verify authorized devices |
-| Traffic Monitoring | Monitor connection activity and usage |
-| Multi-device Support | Support different device platforms |
-
-##  Proposed Architecture
-
-```text
-        USER DEVICE
-             |
-       Internet Access
-             |
-      +------+------+
-      |             |
-     Wi-Fi       Mobile Data
-      |             |
-      +------+------+
-             |
-      ENCRYPTED TUNNEL
-             |
-       STARGATE GATEWAY
-             |
-   +---------+----------+
-   |         |          |
-  Auth    Encryption  Monitoring
-   |         |          |
-   +---------+----------+
-             |
-      SECURE INTERNET
-             |
-      DESTINATION SERVICES
+```bash
+npm install -g stargate-cli
 ```
 
-##  Proposed Technology Stack
+```bash
+stargate connect
+```
 
-| Component | Technology |
+##  Vision
+
+StarGate aims to make secure connectivity accessible through a simple command-line experience.
+
+Rather than requiring users to manually configure complicated networking tools, StarGate provides a unified CLI for managing encrypted network connections.
+
+Its underlying networking engine will use established encryption technologies such as WireGuard.
+
+##  Installation
+
+**Requirements**
+- Node.js 20+
+- npm
+- Linux, Windows or macOS (platform support will be introduced progressively)
+- Administrator/root privileges for network configuration
+- A configured StarGate gateway
+
+Install globally:
+
+```bash
+npm install -g stargate-cli
+```
+
+Verify installation:
+
+```bash
+stargate --version
+```
+
+> Note: The npm package name and installation command are proposed. Installation will become available once the package is published to npm.
+
+##  Commands
+
+| Command | Description |
 |---|---|
-| Encryption | WireGuard |
-| Backend | Python / FastAPI |
-| Database | PostgreSQL |
-| Infrastructure | Linux |
-| Networking | Linux Networking Tools |
-| Authentication | OAuth 2.0 |
-| Desktop Client | Python / Tauri |
-| Mobile Client | Flutter |
-| Deployment | VPS / Cloud Infrastructure |
+| `stargate init` | Initialize StarGate |
+| `stargate connect` | Establish an encrypted connection |
+| `stargate disconnect` | Terminate the connection |
+| `stargate status` | Display connection status |
+| `stargate config` | Manage configuration |
+| `stargate devices` | Manage authorized devices |
+| `stargate gateway` | Configure gateway information |
+| `stargate logs` | View connection logs |
+| `stargate --version` | Display installed version |
+| `stargate --help` | Display available commands |
 
-*Technology selections are proposed and may evolve during development.*
+## 🏗️ System Architecture
+
+```text
+             USER TERMINAL
+                   |
+             STARGATE CLI
+                Node.js
+                   |
+          COMMAND MANAGEMENT
+                   |
+          AUTHENTICATION LAYER
+                   |
+          NETWORKING ENGINE
+               WireGuard
+                   |
+          ENCRYPTED TUNNEL
+                   |
+          STARGATE GATEWAY
+                   |
+             INTERNET
+```
+
+##  Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| Node.js | CLI runtime |
+| npm | Package distribution |
+| TypeScript | Application development |
+| Commander.js | Command management |
+| WireGuard | Encrypted networking |
+| FastAPI | Gateway management API |
+| PostgreSQL | User and device records |
+| Linux | Gateway infrastructure |
+
+##  Core Features
+
+- Encrypted network tunnelling.
+- Wi-Fi and mobile data compatibility.
+- Secure gateway authentication.
+- Automatic connection management.
+- Network switching and reconnection.
+- DNS protection.
+- Kill switch.
+- Connection monitoring.
+- Device management.
+- Cross-platform CLI experience.
 
 ##  Development Roadmap
 
-- [ ] Research network tunnelling and encryption.
-- [ ] Establish StarGate gateway infrastructure.
-- [ ] Implement WireGuard-based encrypted connections.
-- [ ] Develop user authentication.
-- [ ] Build the initial Windows desktop client.
-- [ ] Implement connection and disconnection controls.
+- [ ] Initialize the Node.js project.
+- [ ] Create the StarGate CLI executable.
+- [ ] Implement command management.
+- [ ] Integrate WireGuard.
+- [ ] Develop gateway configuration.
+- [ ] Implement encrypted connections.
+- [ ] Build authentication mechanisms.
+- [ ] Implement connection monitoring.
 - [ ] Add automatic reconnection.
 - [ ] Implement DNS protection and kill switch.
-- [ ] Introduce network monitoring.
-- [ ] Expand to Android and other platforms.
-- [ ] Explore multi-network and enterprise support.
+- [ ] Publish the first npm release.
+- [ ] Expand platform compatibility.
+
+##  Proposed Project Structure
+
+```text
+stargate/
+│
+├── bin/
+│   └── stargate.js
+│
+├── src/
+│   ├── commands/
+│   │   ├── init.ts
+│   │   ├── connect.ts
+│   │   ├── disconnect.ts
+│   │   ├── status.ts
+│   │   └── config.ts
+│   │
+│   ├── core/
+│   │   ├── wireguard.ts
+│   │   ├── gateway.ts
+│   │   └── authentication.ts
+│   │
+│   ├── network/
+│   │   ├── tunnel.ts
+│   │   └── monitor.ts
+│   │
+│   └── index.ts
+│
+├── tests/
+├── package.json
+├── tsconfig.json
+├── README.md
+└── LICENSE
+```
 
 ##  Security Philosophy
 
-StarGate is being developed around three fundamental principles:
+StarGate is built around three fundamental principles:
 
-1. **Privacy:** Network communication should be protected from unauthorized interception.
-2. **Integrity:** Communication should be protected against unauthorized modification.
-3. **Reliability:** Security should remain available across different internet access methods.
+1. Privacy — Protect network traffic through encrypted communication.
+2. Integrity — Protect data against unauthorized modification.
+3. Reliability — Maintain secure connectivity across changing network environments.
 
-StarGate will not claim to make users completely anonymous or eliminate every network threat. Its security will depend on proper implementation, infrastructure protection, and independent testing.
+StarGate will rely on established cryptographic implementations rather than attempting to invent its own encryption algorithms.
 
 ##  Long-Term Vision
 
-The long-term ambition is to develop StarGate into a unified secure-connectivity platform capable of protecting individual devices, private networks, and organizational infrastructure.
+The ambition is to transform StarGate into a unified secure-connectivity platform accessible through a simple terminal command.
 
-Rather than depending on the security of the network a user joins, StarGate aims to provide an additional trusted security layer across different connectivity environments.
+From individual developers to organizations, StarGate aims to provide an additional security layer across different network environments.
 
----
-
-### Project Status
-
-**Status:** Concept / Early Development
-
-**Project:** StarGate
-
-**Category:** Cybersecurity · Network Engineering · Secure Connectivity
-
-**Developer:** AirSPACEx
+**Project:** StarGate CLI  
+**Developer:** AirSPACEx  
+**Category:** Cybersecurity · Networking · Developer Tools  
+**Status:** Early Development
 
 ---
 
-*Building a more secure way to connect.* 
+*Your network. Your gateway. Your security.*
 
-**StarGate — Your connection, behind a shield.**
+**STARGATE — Secure connectivity, one command away.**
